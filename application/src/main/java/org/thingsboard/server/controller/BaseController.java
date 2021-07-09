@@ -483,6 +483,17 @@ public abstract class BaseController {
     }
 
 
+    TestingInfo checkTestingInfoId(TestingId deviceId, Operation operation) throws ThingsboardException {
+        try {
+            validateId(deviceId, "Incorrect deviceId " + deviceId);
+            TestingInfo device = testingService.findTestingInfoById(getCurrentUser().getTenantId(), deviceId);
+            checkNotNull(device);
+            //accessControlService.checkPermission(getCurrentUser(), Resource.TESTING, operation, deviceId, device);
+            return device;
+        } catch (Exception e) {
+            throw handleException(e, false);
+        }
+    }
 
 
 

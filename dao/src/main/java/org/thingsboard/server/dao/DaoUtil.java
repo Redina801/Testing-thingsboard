@@ -89,6 +89,8 @@ public abstract class DaoUtil {
         if (data != null) {
             object = data.toData();
         }
+        System.out.println("-----------DaoUtil: " + object);
+
         return object;
     }
 

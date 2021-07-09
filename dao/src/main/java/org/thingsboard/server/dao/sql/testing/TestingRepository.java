@@ -23,6 +23,7 @@ import org.springframework.data.repository.query.Param;
 import org.thingsboard.server.dao.model.sql.DeviceEntity;
 import org.thingsboard.server.dao.model.sql.DeviceInfoEntity;
 import org.thingsboard.server.dao.model.sql.TestingEntity;
+import org.thingsboard.server.dao.model.sql.TestingInfoEntity;
 
 import java.util.List;
 import java.util.UUID;
@@ -35,6 +36,12 @@ public interface TestingRepository extends PagingAndSortingRepository<TestingEnt
 
 
 
+
+    @Query("SELECT new org.thingsboard.server.dao.model.sql.TestingInfoEntity(d, c.title, c.additionalInfo) " +
+            "FROM TestingEntity d " +
+            "LEFT JOIN CustomerEntity c on c.id = d.customerId " +
+            "WHERE d.id = :testingId")
+    TestingInfoEntity findTestingInfoById(@Param("testingId") UUID testingId);
 
 
     @Query("SELECT d FROM TestingEntity d WHERE d.tenantId = :tenantId")

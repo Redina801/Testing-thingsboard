@@ -27,6 +27,7 @@ import java.util.List;
 
 public interface TestingService {
 
+    TestingInfo findTestingInfoById(TenantId tenantId, TestingId deviceId);
 
     Testing saveTesting(Testing testing);
 

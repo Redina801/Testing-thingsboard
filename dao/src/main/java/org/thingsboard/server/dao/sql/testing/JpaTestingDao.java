@@ -64,6 +64,13 @@ public class JpaTestingDao extends JpaAbstractSearchTextDao<TestingEntity, Testi
 
 
     @Override
+    public TestingInfo findTestingInfoById(TenantId tenantId, UUID testingId) {
+        System.out.println("----------: ktu jemi te jpaDaoTesting: "+ testingId);
+        //TestingInfo ti = DaoUtil.getData(testingRepository.findTestingInfoById(testingId));
+        return DaoUtil.getData(testingRepository.findTestingInfoById(testingId));
+    }
+
+    @Override
     public PageData<Testing>findTestingsByTenantId(UUID tenantId, PageLink pageLink) {
         if (StringUtils.isEmpty(pageLink.getTextSearch())) {
             return DaoUtil.toPageData(

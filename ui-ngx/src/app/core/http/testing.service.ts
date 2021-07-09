@@ -80,12 +80,16 @@ defaultHttpOptionsFromConfig(config));
   }
 
   public getTestingInfo(testingId: string, config?: RequestConfig): Observable<TestingInfo> {
-    return this.http.get<TestingInfo>(`/api/testing/info/${testingId}`, defaultHttpOptionsFromConfig(config));
+    return this.http.get<Testing>(`/api/testing/${testingId}`, defaultHttpOptionsFromConfig(config));
+
+    //return this.http.get<TestingInfo>(`/api/testing/info/${testingId}`, defaultHttpOptionsFromConfig(config));
   }
 
-  public saveTesting(device: Testing, config?: RequestConfig): Observable<Testing> {
+  public saveTesting(testing: Testing, config?: RequestConfig): Observable<Testing> {
     console.log("ore a futet ktu a jo? ");
-    return this.http.post<Testing>('/api/testing', device, defaultHttpOptionsFromConfig(config));
+    console.log("------------- : ", testing);
+
+    return this.http.post<Testing>('/api/testing', testing, defaultHttpOptionsFromConfig(config));
   }
   public saveTesting1() : Observable<any> {
     console.log("ore a futet ktu a jo? ");

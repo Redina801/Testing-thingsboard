@@ -26,12 +26,14 @@ import org.thingsboard.server.common.data.page.PageData;
 import org.thingsboard.server.common.data.page.PageLink;
 import org.thingsboard.server.dao.Dao;
 import org.thingsboard.server.dao.TenantEntityDao;
+import org.thingsboard.server.dao.model.sql.TestingEntity;
 
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
 public interface TestingDao extends Dao<Testing>, TenantEntityDao {
+
 
     /**
      * Find testing info by id.
@@ -40,7 +42,7 @@ public interface TestingDao extends Dao<Testing>, TenantEntityDao {
      * @param testingId the testing id
      * @return the testing info object
      */
-//    TestingInfo findTestingInfoById(TenantId tenantId, UUID testingId);
+    TestingInfo findTestingInfoById(TenantId tenantId, UUID testingId);
 
     /**
      * Save or update testing object

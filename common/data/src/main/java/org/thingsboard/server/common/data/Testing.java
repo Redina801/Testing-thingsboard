@@ -37,6 +37,7 @@ public class Testing extends SearchTextBasedWithAdditionalInfo<TestingId> implem
     private String sensorType;
     private String model;
     private String protocol;
+    private String customerTitle;
 
     @JsonIgnore
     private byte[] testingDataBytes;
@@ -57,6 +58,7 @@ public class Testing extends SearchTextBasedWithAdditionalInfo<TestingId> implem
         this.sensorType = device.getSensorType();
         this.model = device.getModel();
         this.protocol = device.getProtocol();
+        this.customerTitle = "";
     }
 
     public TenantId getTenantId() {

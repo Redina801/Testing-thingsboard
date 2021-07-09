@@ -31,6 +31,7 @@ public class EntityIdSerializer extends JsonSerializer<EntityId> {
     public void serialize(EntityId value, JsonGenerator gen, SerializerProvider serializers) throws IOException, JsonProcessingException {
         gen.writeStartObject();
         gen.writeStringField("entityType", value.getEntityType().name());
+        System.out.println("------------: : " + value.getEntityType().name() + value.getId().toString());
         gen.writeStringField("id", value.getId().toString());
         gen.writeEndObject();
     }

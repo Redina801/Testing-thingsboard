@@ -105,8 +105,8 @@ export class DevicesTableConfigResolver implements Resolve<EntityTableConfig<Dev
         mergeMap((savedDevice) => this.deviceService.getDeviceInfo(savedDevice.id.id)
       ));
     };
-    this.config.onEntityAction = action => this.onDeviceAction(action);
-    this.config.detailsReadonly = () => this.config.componentsData.deviceScope === 'customer_user';
+    // this.config.onEntityAction = action => this.onDeviceAction(action);
+    //this.config.detailsReadonly = () => this.config.componentsData.deviceScope === 'customer_user';
 
     this.config.headerComponent = DeviceTableHeaderComponent;
 

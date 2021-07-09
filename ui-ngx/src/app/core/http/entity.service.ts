@@ -916,6 +916,7 @@ export class EntityService {
         }
         saveEntityObservable = this.deviceService.saveDevice(device, config);
         break;
+      
       case EntityType.ASSET:
         const asset: Asset = {
           name: entityData.name,

@@ -174,6 +174,7 @@ public class TestingServiceImpl extends AbstractEntityService implements Testing
     }
 
 
+
     @Override
     public PageData<Testing> findTestingsByTenantIdAndType(TenantId tenantId, String sensorType, PageLink pageLink) {
         log.trace("Executing findTestingssByTenantIdAndSensorType, tenantId [{}], sensorType [{}], pageLink [{}]", tenantId, sensorType, pageLink);
@@ -197,7 +198,12 @@ public class TestingServiceImpl extends AbstractEntityService implements Testing
         }
     }
 
-
+    @Override
+    public TestingInfo findTestingInfoById(TenantId tenantId, TestingId deviceId) {
+        log.trace("Executing findDeviceInfoById [{}]", deviceId);
+        validateId(deviceId, INCORRECT_TESTING_ID + deviceId);
+        return testingDao.findTestingInfoById(tenantId, deviceId.getId());
+    }
 
 
     @Override

@@ -35,6 +35,8 @@ export interface Testing extends BaseData<TestingId> {
   model: string;
   protocol: string;
   additionalInfo?: any;
+  customerTitle: string;
+
 }
 
 

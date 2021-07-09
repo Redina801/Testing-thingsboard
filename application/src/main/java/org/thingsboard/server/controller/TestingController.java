@@ -105,7 +105,33 @@ public class TestingController  extends BaseController {
 
 
 
+    @PreAuthorize("hasAnyAuthority('TENANT_ADMIN', 'CUSTOMER_USER')")
+    @RequestMapping(value = "/testing/info/{testingId}", method = RequestMethod.GET)
+    @ResponseBody
+    public TestingInfo getTestingInfoById(@PathVariable(TESTING_ID) String strDeviceId) throws ThingsboardException {
+        checkParameter(TESTING_ID, strDeviceId);
+        try {
+            TestingId deviceId = new TestingId(toUUID(strDeviceId));
+            System.out.println("---------: ktu jemi te testing controller: "+ toUUID(strDeviceId));
+            return checkTestingInfoId(deviceId, Operation.READ);
 
+        } catch (Exception e) {
+            throw handleException(e);
+        }
+    }
+
+    //@PreAuthorize("hasAnyAuthority('TENANT_ADMIN', 'CUSTOMER_USER')")
+    @RequestMapping(value = "/testing/{testingId}", method = RequestMethod.GET)
+    @ResponseBody
+    public Testing getTestingById(@PathVariable(TESTING_ID) String strDeviceId) throws ThingsboardException {
+        checkParameter(TESTING_ID, strDeviceId);
+        try {
+            TestingId deviceId = new TestingId(toUUID(strDeviceId));
+            return checkTestingId(deviceId, Operation.READ);
+        } catch (Exception e) {
+            throw handleException(e);
+        }
+    }
 
     @PreAuthorize("hasAuthority('TENANT_ADMIN')")
     @RequestMapping(value = "/testing/{testingId}", method = RequestMethod.DELETE)

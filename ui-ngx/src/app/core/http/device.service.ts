@@ -77,6 +77,7 @@ export class DeviceService {
   }
 
   public saveDevice(device: Device, config?: RequestConfig): Observable<Device> {
+    console.log("------------- : ", device);
     return this.http.post<Device>('/api/device', device, defaultHttpOptionsFromConfig(config));
   }
 
