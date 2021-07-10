@@ -39,6 +39,14 @@ public class Testing extends SearchTextBasedWithAdditionalInfo<TestingId> implem
     private String protocol;
     private String customerTitle;
 
+    public String getCustomerTitle() {
+        return customerTitle;
+    }
+
+    public void setCustomerTitle(String customerTitle) {
+        this.customerTitle = customerTitle;
+    }
+
     @JsonIgnore
     private byte[] testingDataBytes;
 
