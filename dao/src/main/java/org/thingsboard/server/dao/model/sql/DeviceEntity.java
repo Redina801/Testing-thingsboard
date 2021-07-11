@@ -39,13 +39,11 @@ public final class DeviceEntity extends AbstractDeviceEntity<Device> {
 
     public DeviceEntity() {
         super();
-        System.out.println("---------- Po ktu futesh te device entity");
 
     }
 
     public DeviceEntity(Device device) {
         super(device);
-        System.out.println("---------- Po ktu futesh te abstract device entity");
 
     }
 

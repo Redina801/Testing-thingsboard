@@ -182,9 +182,6 @@ export class TestingWizardDialogComponent extends
 
       protocol: this.testingWizardFormGroup.get('protocol').value,
 
-      additionalInfo: {
-        description: this.testingWizardFormGroup.get('description').value
-      },
       customerId: null
     };
     console.log("----:::  ", device)

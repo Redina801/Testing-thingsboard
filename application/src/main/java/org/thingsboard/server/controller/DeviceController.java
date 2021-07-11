@@ -111,6 +111,9 @@ public class DeviceController extends BaseController {
     @ResponseBody
     public Device saveDevice(@RequestBody Device device,
                              @RequestParam(name = "accessToken", required = false) String accessToken) throws ThingsboardException {
+
+        System.out.println("-----::::::::::: + " + device);
+
         try {
             device.setTenantId(getCurrentUser().getTenantId());
 

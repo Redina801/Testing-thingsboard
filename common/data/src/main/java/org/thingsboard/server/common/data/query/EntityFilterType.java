@@ -22,6 +22,8 @@ public enum EntityFilterType {
     ENTITY_TYPE("entityType"),
     ASSET_TYPE("assetType"),
     DEVICE_TYPE("deviceType"),
+    TESTING_TYPE("testingType"),
+
     ENTITY_VIEW_TYPE("entityViewType"),
     RELATIONS_QUERY("relationsQuery"),
     ASSET_SEARCH_QUERY("assetSearchQuery"),

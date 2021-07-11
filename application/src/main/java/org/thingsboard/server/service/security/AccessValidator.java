@@ -25,27 +25,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.async.DeferredResult;
 import org.thingsboard.common.util.ThingsBoardThreadFactory;
-import org.thingsboard.server.common.data.ApiUsageState;
-import org.thingsboard.server.common.data.Customer;
-import org.thingsboard.server.common.data.Device;
-import org.thingsboard.server.common.data.DeviceProfile;
-import org.thingsboard.server.common.data.EntityView;
-import org.thingsboard.server.common.data.Tenant;
-import org.thingsboard.server.common.data.User;
+import org.thingsboard.server.common.data.*;
 import org.thingsboard.server.common.data.asset.Asset;
 import org.thingsboard.server.common.data.exception.ThingsboardException;
-import org.thingsboard.server.common.data.id.ApiUsageStateId;
-import org.thingsboard.server.common.data.id.AssetId;
-import org.thingsboard.server.common.data.id.CustomerId;
-import org.thingsboard.server.common.data.id.DeviceId;
-import org.thingsboard.server.common.data.id.DeviceProfileId;
-import org.thingsboard.server.common.data.id.EntityId;
-import org.thingsboard.server.common.data.id.EntityIdFactory;
-import org.thingsboard.server.common.data.id.EntityViewId;
-import org.thingsboard.server.common.data.id.RuleChainId;
-import org.thingsboard.server.common.data.id.RuleNodeId;
-import org.thingsboard.server.common.data.id.TenantId;
-import org.thingsboard.server.common.data.id.UserId;
+import org.thingsboard.server.common.data.id.*;
 import org.thingsboard.server.common.data.rule.RuleChain;
 import org.thingsboard.server.common.data.rule.RuleNode;
 import org.thingsboard.server.controller.HttpValidationCallback;
@@ -58,6 +41,7 @@ import org.thingsboard.server.dao.entityview.EntityViewService;
 import org.thingsboard.server.dao.exception.IncorrectParameterException;
 import org.thingsboard.server.dao.rule.RuleChainService;
 import org.thingsboard.server.dao.tenant.TenantService;
+import org.thingsboard.server.dao.testing.TestingService;
 import org.thingsboard.server.dao.usagerecord.ApiUsageStateService;
 import org.thingsboard.server.dao.user.UserService;
 import org.thingsboard.server.service.security.model.SecurityUser;
@@ -96,6 +80,9 @@ public class AccessValidator {
 
     @Autowired
     protected DeviceService deviceService;
+
+    @Autowired
+    protected TestingService testingService;
 
     @Autowired
     protected DeviceProfileService deviceProfileService;
@@ -180,6 +167,9 @@ public class AccessValidator {
             case DEVICE:
                 validateDevice(currentUser, operation, entityId, callback);
                 return;
+//            case TESTING:
+//                validateTesting(currentUser, operation, entityId, callback);
+//                return;
             case DEVICE_PROFILE:
                 validateDeviceProfile(currentUser, operation, entityId, callback);
                 return;
@@ -232,6 +222,27 @@ public class AccessValidator {
             }), executor);
         }
     }
+
+
+//    private void validateTesting(final SecurityUser currentUser, Operation operation, EntityId entityId, FutureCallback<ValidationResult> callback) {
+//        if (currentUser.isSystemAdmin()) {
+//            callback.onSuccess(ValidationResult.accessDenied(SYSTEM_ADMINISTRATOR_IS_NOT_ALLOWED_TO_PERFORM_THIS_OPERATION));
+//        } else {
+//            ListenableFuture<Testing> deviceFuture = testingService.findTestingByIdAsync(currentUser.getTenantId(), new TestingId(entityId.getId()));
+//            Futures.addCallback(deviceFuture, getCallback(callback, device -> {
+//                if (device == null) {
+//                    return ValidationResult.entityNotFound(DEVICE_WITH_REQUESTED_ID_NOT_FOUND);
+//                } else {
+//                    try {
+//                        accessControlService.checkPermission(currentUser, Resource.DEVICE, operation, entityId, device);
+//                    } catch (ThingsboardException e) {
+//                        return ValidationResult.accessDenied(e.getMessage());
+//                    }
+//                    return ValidationResult.ok(device);
+//                }
+//            }), executor);
+//        }
+//    }
 
     private void validateDeviceProfile(final SecurityUser currentUser, Operation operation, EntityId entityId, FutureCallback<ValidationResult> callback) {
         if (currentUser.isSystemAdmin()) {

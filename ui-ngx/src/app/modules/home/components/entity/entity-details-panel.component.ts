@@ -233,6 +233,7 @@ export class EntityDetailsPanelComponent extends PageComponent implements AfterV
     this.entitiesTableConfig.loadEntity(this.currentEntityId).subscribe(
       (entity) => {
         this.entity = entity;
+        console.log("-----: Ktu jemi te reload i entity details: ", entity);
         this.entityComponent.entity = entity;
         if (this.entityTabsComponent) {
           this.entityTabsComponent.entity = entity;
@@ -274,6 +275,7 @@ export class EntityDetailsPanelComponent extends PageComponent implements AfterV
   }
 
   saveEntity() {
+    console.log("Ktu mduket se jemi");
     if (this.detailsForm.valid) {
       const editingEntity = {...this.editingEntity, ...this.entityComponent.entityFormValue()};
       if (this.editingEntity.hasOwnProperty('additionalInfo')) {

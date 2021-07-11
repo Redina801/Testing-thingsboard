@@ -79,7 +79,6 @@ public abstract class AbstractDeviceEntity<T extends Device> extends BaseSqlEnti
 
     public AbstractDeviceEntity() {
         super();
-        System.out.println("---------- Po ktu futesh te abstract device entity");
     }
 
     public AbstractDeviceEntity(Device device) {

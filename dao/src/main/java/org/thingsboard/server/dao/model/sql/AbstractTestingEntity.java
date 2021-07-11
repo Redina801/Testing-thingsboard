@@ -73,40 +73,39 @@ public abstract class AbstractTestingEntity<T extends Testing> extends BaseSqlEn
 
     public AbstractTestingEntity() {
         super();
-        System.out.println("---------- Po ktu futesh te abstact testing entity");
 
     }
 
-    public AbstractTestingEntity(Testing device) {
-        if (device.getId() != null) {
-            this.setUuid(device.getUuidId());
+    public AbstractTestingEntity(Testing testing) {
+        if (testing.getId() != null) {
+            this.setUuid(testing.getUuidId());
         }
-        this.setCreatedTime(device.getCreatedTime());
-        if (device.getTenantId() != null) {
-            this.tenantId = device.getTenantId().getId();
+        this.setCreatedTime(testing.getCreatedTime());
+        if (testing.getTenantId() != null) {
+            this.tenantId = testing.getTenantId().getId();
         }
-        if (device.getCustomerId() != null) {
-            this.customerId = device.getCustomerId().getId();
+        if (testing.getCustomerId() != null) {
+            this.customerId = testing.getCustomerId().getId();
         }
 
-        this.name = device.getName();
-        this.sensorType = device.getSensorType();
-        this.model = device.getModel();
-        this.protocol = device.getProtocol();
-        this.additionalInfo = device.getAdditionalInfo();
+        this.name = testing.getName();
+        this.sensorType = testing.getSensorType();
+        this.model =testing.getModel();
+        this.protocol = testing.getProtocol();
+        this.additionalInfo = testing.getAdditionalInfo();
     }
 
     public AbstractTestingEntity(TestingEntity deviceEntity) {
-//        this.setId(deviceEntity.getId());
-//        this.setCreatedTime(deviceEntity.getCreatedTime());
-//        this.tenantId = deviceEntity.getTenantId();
-//        this.customerId = deviceEntity.getCustomerId();
-//        this.deviceProfileId = deviceEntity.getDeviceProfileId();
-//        this.deviceData = deviceEntity.getDeviceData();
-//        this.type = deviceEntity.getType();
-//        this.name = deviceEntity.getName();
-//
-//        this.additionalInfo = deviceEntity.getAdditionalInfo();
+        this.setId(deviceEntity.getId());
+        this.setCreatedTime(deviceEntity.getCreatedTime());
+        this.tenantId = deviceEntity.getTenantId();
+        this.customerId = deviceEntity.getCustomerId();
+        this.name = deviceEntity.getName();
+        this.sensorType = deviceEntity.getSensorType();
+        this.model = deviceEntity.getModel();
+        this.protocol = deviceEntity.getProtocol();
+
+        this.additionalInfo = deviceEntity.getAdditionalInfo();
     }
 
     @Override

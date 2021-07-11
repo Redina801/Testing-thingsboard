@@ -25,7 +25,7 @@ import { ActionNotificationShow } from '@core/notification/notification.actions'
 import { TranslateService } from '@ngx-translate/core';
 import { EntityTableConfig } from '@home/models/entity/entities-table-config.models';
 import { Subject } from 'rxjs';
-import { TestingInfo } from '@app/shared/models/testing.models';
+import { Testing, TestingInfo } from '@app/shared/models/testing.models';
 
 @Component({
   selector: 'tb-testing',
@@ -80,17 +80,15 @@ export class TestingComponent extends EntityComponent<TestingInfo> {
     );
   }
 
-  updateForm(entity: TestingInfo) {
+  updateForm(entity: Testing) {
+
+    console.log("Ktu futet kjo m si jo ", entity);
     this.entityForm.patchValue({name: entity.name});
     this.entityForm.patchValue({sensorType: entity.sensorType});
     this.entityForm.patchValue({model: entity.model});
     this.entityForm.patchValue({protocol: entity.protocol});
 
-    this.entityForm.patchValue({
-      additionalInfo:
-        {
-        }
-    });
+  
     this.entityForm.patchValue({additionalInfo: {description: entity.additionalInfo ? entity.additionalInfo.description : ''}});
   }
 

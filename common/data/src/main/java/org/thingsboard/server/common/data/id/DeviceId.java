@@ -29,9 +29,12 @@ public class DeviceId extends UUIDBased implements EntityId {
     @JsonCreator
     public DeviceId(@JsonProperty("id") UUID id) {
         super(id);
+        System.out.println("ktu je te deviceId1 : " + id);
     }
 
     public static DeviceId fromString(String deviceId) {
+        System.out.println("ktu je te deviceId2 : ");
+
         return new DeviceId(UUID.fromString(deviceId));
     }
 

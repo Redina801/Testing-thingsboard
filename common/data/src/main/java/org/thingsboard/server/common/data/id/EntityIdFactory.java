@@ -48,6 +48,8 @@ public class EntityIdFactory {
                 return new DashboardId(uuid);
             case DEVICE:
                 return new DeviceId(uuid);
+            case TESTING:
+                return new TestingId(uuid);
             case ASSET:
                 return new AssetId(uuid);
             case ALARM:

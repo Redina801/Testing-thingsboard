@@ -30,15 +30,21 @@ import {
 } from '@app/shared/models/testing.models';
 import { EntitySubtype } from '@app/shared/models/entity-type.models';
 import { AuthService } from '@core/auth/auth.service';
+import { TestingRoutingModule } from '@app/modules/home/pages/testing/testing-routing.module';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TestingService {
 
+  testingInfo:TestingInfo;
+  testing_:any;
   constructor(
     private http: HttpClient
-  ) { }
+  ) {
+    this.testing_ = null;
+   }
+  
 
   //ktu beji ndryshimet
 
@@ -80,12 +86,31 @@ defaultHttpOptionsFromConfig(config));
   }
 
   public getTestingInfo(testingId: string, config?: RequestConfig): Observable<TestingInfo> {
-    return this.http.get<Testing>(`/api/testing/${testingId}`, defaultHttpOptionsFromConfig(config));
+    return  this.http.get<TestingInfo>(`/api/testing/${testingId}`, defaultHttpOptionsFromConfig(config));
 
     //return this.http.get<TestingInfo>(`/api/testing/info/${testingId}`, defaultHttpOptionsFromConfig(config));
   }
 
   public saveTesting(testing: Testing, config?: RequestConfig): Observable<Testing> {
+
+    // private TenantId tenantId;
+    // private CustomerId customerId;
+    // private String name;
+    // private String sensorType;
+    // private String model;
+    // private String protocol;
+    // private String customerTitle;
+    this.testing_ = {
+      tenantId: testing.tenantId,
+      customerId: testing.customerId,
+      name: testing.name,
+      sensorType: testing.sensorType,
+      model: testing.model,
+      protocol: testing.protocol,
+      customerTitle: ""
+
+    }
+    
     console.log("ore a futet ktu a jo? ");
     console.log("------------- : ", testing);
 

@@ -70,6 +70,19 @@ public class TestingController  extends BaseController {
         System.out.println("--------: " + testing);
         try {
             testing.setTenantId(getCurrentUser().getTenantId());
+            checkEntity(testing.getId(), testing, Resource.TESTING);
+            return testingService.saveTesting(testing);
+        } catch (ThingsboardException e) {
+            e.printStackTrace();
+        }
+        System.out.println("e po po qenka kshu kjo");
+        return testing;
+    }
+    @RequestMapping(value = "/testing/update", method = RequestMethod.POST)
+    public Testing updatetesting(@RequestBody Testing testing) {
+        System.out.println("--------:UPDATE " + testing);
+        try {
+            testing.setTenantId(getCurrentUser().getTenantId());
             checkEntity(testing.getId(), testing, Resource.DEVICE);
             return testingService.saveTesting(testing);
         } catch (ThingsboardException e) {
@@ -123,11 +136,12 @@ public class TestingController  extends BaseController {
     //@PreAuthorize("hasAnyAuthority('TENANT_ADMIN', 'CUSTOMER_USER')")
     @RequestMapping(value = "/testing/{testingId}", method = RequestMethod.GET)
     @ResponseBody
-    public Testing getTestingById(@PathVariable(TESTING_ID) String strDeviceId) throws ThingsboardException {
+    public TestingInfo getTestingById(@PathVariable(TESTING_ID) String strDeviceId) throws ThingsboardException {
         checkParameter(TESTING_ID, strDeviceId);
         try {
             TestingId deviceId = new TestingId(toUUID(strDeviceId));
-            return checkTestingId(deviceId, Operation.READ);
+            Testing testingObject = checkTestingId(deviceId, Operation.READ);
+            return new TestingInfo(testingObject,"",true);
         } catch (Exception e) {
             throw handleException(e);
         }
@@ -152,7 +166,7 @@ public class TestingController  extends BaseController {
 
            // deviceStateService.onDeviceDeleted(device);
         } catch (Exception e) {
-            logEntityAction(emptyId(EntityType.DEVICE),
+            logEntityAction(emptyId(EntityType.TESTING),
                     null,
                     null,
                     ActionType.DELETED, e, strTestingId);

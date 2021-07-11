@@ -397,6 +397,9 @@ public abstract class BaseController {
                 case DEVICE:
                     checkDeviceId(new DeviceId(entityId.getId()), operation);
                     return;
+                case TESTING:
+                    checkTestingId(new TestingId(entityId.getId()), operation);
+                    return;
                 case DEVICE_PROFILE:
                     checkDeviceProfileId(new DeviceProfileId(entityId.getId()), operation);
                     return;

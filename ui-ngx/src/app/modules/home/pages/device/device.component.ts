@@ -75,6 +75,7 @@ export class DeviceComponent extends EntityComponent<DeviceInfo> {
   }
 
   buildForm(entity: DeviceInfo): FormGroup {
+    console.log("ktu jemi te build form e device_____");
     return this.fb.group(
       {
         name: [entity ? entity.name : '', [Validators.required]],
@@ -93,6 +94,8 @@ export class DeviceComponent extends EntityComponent<DeviceInfo> {
   }
 
   updateForm(entity: DeviceInfo) {
+    console.log("ktu jemi te update form e device_____");
+
     this.entityForm.patchValue({name: entity.name});
     this.entityForm.patchValue({deviceProfileId: entity.deviceProfileId});
     this.entityForm.patchValue({label: entity.label});

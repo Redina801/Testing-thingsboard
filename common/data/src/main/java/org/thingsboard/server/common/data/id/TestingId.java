@@ -29,13 +29,17 @@ public class TestingId extends UUIDBased implements EntityId{
     @JsonCreator
     public TestingId(@JsonProperty("id") UUID id) {
         super(id);
+        System.out.println("ktu je te testingId1 : " + id);
+
     }
 
     public static TestingId fromString(String testingId) {
+        System.out.println("ktu je te testingId2 : " + testingId);
+
         return new TestingId(UUID.fromString(testingId));
     }
 
-    @JsonIgnore
+
     @Override
     public EntityType getEntityType() {
         return EntityType.TESTING;

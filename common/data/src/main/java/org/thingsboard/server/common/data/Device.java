@@ -51,6 +51,7 @@ public class Device extends SearchTextBasedWithAdditionalInfo<DeviceId> implemen
 
     public Device(DeviceId id) {
         super(id);
+
     }
 
     public Device(Device device) {
