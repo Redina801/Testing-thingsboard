@@ -65,9 +65,9 @@ public abstract class AbstractTestingEntity<T extends Testing> extends BaseSqlEn
     @Column(name = "protocol")
     private String protocol;
 
-    @Type(type = "json")
-    @Column(name = "additional_info")
-    private JsonNode additionalInfo;
+//    @Type(type = "json")
+//    @Column(name = "additional_info")
+//    private JsonNode additionalInfo;
 
 
 
@@ -93,7 +93,7 @@ public abstract class AbstractTestingEntity<T extends Testing> extends BaseSqlEn
         this.sensorType = device.getSensorType();
         this.model = device.getModel();
         this.protocol = device.getProtocol();
-        this.additionalInfo = device.getAdditionalInfo();
+      //  this.additionalInfo = device.getAdditionalInfo();
     }
 
     public AbstractTestingEntity(TestingEntity deviceEntity) {
@@ -129,7 +129,7 @@ public abstract class AbstractTestingEntity<T extends Testing> extends BaseSqlEn
         testing.setSensorType(sensorType);
         testing.setModel(model);
         testing.setProtocol(protocol);
-        testing.setAdditionalInfo(additionalInfo);
+     //   testing.setAdditionalInfo(additionalInfo);
         return testing;
     }
 

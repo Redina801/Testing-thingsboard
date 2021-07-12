@@ -69,8 +69,7 @@ export class TestingWizardDialogComponent extends
         sensorType: ['', Validators.required],
         model: ['', Validators.required],
         protocol: ['', Validators.required],
-        
-        description: ['']
+
       }
     );
 
@@ -181,10 +180,6 @@ export class TestingWizardDialogComponent extends
       model: this.testingWizardFormGroup.get('model').value,
 
       protocol: this.testingWizardFormGroup.get('protocol').value,
-
-      additionalInfo: {
-        description: this.testingWizardFormGroup.get('description').value
-      },
       customerId: null
     };
     console.log("----:::  ", device)

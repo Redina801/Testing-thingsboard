@@ -39,7 +39,7 @@
       <mat-step [stepControl]="testingWizardFormGroup">
         <form [formGroup]="testingWizardFormGroup" style="padding-bottom: 16px;">
           <!-- Device Details text on wizard -->
-          <ng-template matStepLabel>{{ 'device.wizard.device-details' | translate}}</ng-template> 
+          <ng-template matStepLabel>{{ 'device.wizard.device-details' | translate}}</ng-template>
           <fieldset [disabled]="isLoading$ | async">
             <mat-form-field class="mat-block">
               <!-- Name* -->
@@ -151,10 +151,10 @@
                 {{ 'device.overwrite-activity-time' | translate }}
               </mat-checkbox>
             </div> -->
-            <mat-form-field class="mat-block">
-              <mat-label translate>device.description</mat-label>
-              <textarea matInput formControlName="description" rows="2"></textarea>
-            </mat-form-field>
+<!--            <mat-form-field class="mat-block">-->
+<!--              <mat-label translate>device.description</mat-label>-->
+<!--              <textarea matInput formControlName="description" rows="2"></textarea>-->
+<!--            </mat-form-field>-->
           </fieldset>
         </form>
       </mat-step>

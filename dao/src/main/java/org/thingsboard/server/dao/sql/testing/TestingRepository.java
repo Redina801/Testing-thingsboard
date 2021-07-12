@@ -37,7 +37,7 @@ public interface TestingRepository extends PagingAndSortingRepository<TestingEnt
 
 
 
-    @Query("SELECT new org.thingsboard.server.dao.model.sql.TestingInfoEntity(d, c.title, c.additionalInfo) " +
+    @Query("SELECT new org.thingsboard.server.dao.model.sql.TestingInfoEntity(d, c.title) " +
             "FROM TestingEntity d " +
             "LEFT JOIN CustomerEntity c on c.id = d.customerId " +
             "WHERE d.id = :testingId")

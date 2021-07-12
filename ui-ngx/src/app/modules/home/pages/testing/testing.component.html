@@ -74,7 +74,7 @@
   <form [formGroup]="entityForm">
     <fieldset [disabled]="(isLoading$ | async) || !isEdit">
       <mat-form-field class="mat-block">
-        <mat-label >Sensor</mat-label>
+        <mat-label >Name</mat-label>
         <input matInput formControlName="name" value="asdfsafsdf" required>
         <mat-error *ngIf="entityForm.get('name').hasError('required')">
           {{ 'device.name-required' | translate }}
@@ -129,10 +129,10 @@
             {{ 'device.overwrite-activity-time' | translate }}
           </mat-checkbox> -->
         </div>
-        <mat-form-field class="mat-block">
-          <mat-label translate>device.description</mat-label>
-          <textarea matInput formControlName="description" rows="2"></textarea>
-        </mat-form-field>
+<!--        <mat-form-field class="mat-block">-->
+<!--          <mat-label translate>device.description</mat-label>-->
+<!--          <textarea matInput formControlName="description" rows="2"></textarea>-->
+<!--        </mat-form-field>-->
       </div>
     </fieldset>
   </form>

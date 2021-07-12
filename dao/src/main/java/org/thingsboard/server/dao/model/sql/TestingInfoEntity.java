@@ -28,17 +28,14 @@ public class TestingInfoEntity extends AbstractTestingEntity<TestingInfo>{
     }
 
     public TestingInfoEntity(TestingEntity testingEntity,
-                            String customerTitle,
-                            Object customerAdditionalInfo
+                            String customerTitle
+
                             ) {
         super(testingEntity);
         this.customerTitle = customerTitle;
-        if (customerAdditionalInfo != null && ((JsonNode)customerAdditionalInfo).has("isPublic")) {
-            this.customerIsPublic = ((JsonNode)customerAdditionalInfo).get("isPublic").asBoolean();
-        } else {
-            this.customerIsPublic = false;
+        this.customerIsPublic = false;
         }
-    }
+
 
     @Override
     public TestingInfo toData() {

@@ -34,7 +34,6 @@ export interface Testing extends BaseData<TestingId> {
   sensorType: string;
   model: string;
   protocol: string;
-  additionalInfo?: any;
   customerTitle?: string;
 
 }

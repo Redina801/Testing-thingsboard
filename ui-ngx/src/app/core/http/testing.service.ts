@@ -80,7 +80,7 @@ defaultHttpOptionsFromConfig(config));
   }
 
   public getTestingInfo(testingId: string, config?: RequestConfig): Observable<TestingInfo> {
-    return this.http.get<Testing>(`/api/testing/${testingId}`, defaultHttpOptionsFromConfig(config));
+    return this.http.get<TestingInfo>(`/api/testing/${testingId}`, defaultHttpOptionsFromConfig(config));
 
     //return this.http.get<TestingInfo>(`/api/testing/info/${testingId}`, defaultHttpOptionsFromConfig(config));
   }
