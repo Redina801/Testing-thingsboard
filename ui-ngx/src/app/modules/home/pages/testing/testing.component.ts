@@ -63,7 +63,6 @@ export class TestingComponent extends EntityComponent<TestingInfo> {
   }
 
   buildForm(entity: TestingInfo): FormGroup {
-    console.log("00000000000000 -: ", entity);
     return this.fb.group(
       {
         name: [entity ? entity.name : '', [Validators.required]],
@@ -82,7 +81,6 @@ export class TestingComponent extends EntityComponent<TestingInfo> {
 
   updateForm(entity: Testing) {
 
-    console.log("Ktu futet kjo m si jo ", entity);
     this.entityForm.patchValue({name: entity.name});
     this.entityForm.patchValue({sensorType: entity.sensorType});
     this.entityForm.patchValue({model: entity.model});

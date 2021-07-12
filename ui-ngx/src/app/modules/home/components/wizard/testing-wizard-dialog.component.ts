@@ -184,7 +184,6 @@ export class TestingWizardDialogComponent extends
 
       customerId: null
     };
-    console.log("----:::  ", device)
     this.testingService.saveTesting(device).subscribe();
     return this.data.entitiesTableConfig.saveEntity(deepTrim(device));
   }

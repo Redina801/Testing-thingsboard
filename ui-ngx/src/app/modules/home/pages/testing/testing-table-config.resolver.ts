@@ -87,12 +87,12 @@ export class TestingTableConfigResolver implements Resolve<EntityTableConfig<Tes
     this.config.deleteEntitiesContent = () => this.translate.instant('device.delete-devices-text');
 
     this.config.loadEntity = id => this.testingService.getTestingInfo(id.id);
-    this.config.saveEntity = device => {
-      return this.testingService.saveTesting(device).pipe(
+    this.config.saveEntity = testing => {
+      return this.testingService.saveTesting(testing).pipe(
         tap(() => {
           this.broadcast.broadcast('deviceSaved');
         }),
-        mergeMap((savedDevice) => this.testingService.getTestingInfo(savedDevice.id.id)
+        mergeMap((savedTesting) => this.testingService.getTestingInfo(savedTesting.id.id)
 
       ));
 
@@ -159,16 +159,8 @@ export class TestingTableConfigResolver implements Resolve<EntityTableConfig<Tes
       this.config.entitiesFetchFunction = pageLink =>
         this.testingService.getTenantDeviceInfos(pageLink);
       this.config.deleteEntity = id => this.testingService.deleteDevice(id.id);
-    } else {
-      this.config.entitiesFetchFunction = pageLink =>
-        this.testingService.getCustomerDeviceInfosByDeviceProfileId(this.customerId, pageLink,
-          this.config.componentsData.deviceProfileId !== null ?
-          this.config.componentsData.deviceProfileId.id : '');
-      //this.config.deleteEntity = id => this.testingService.unassignDeviceFromCustomer(id.id);
     }
   }
-
-
 
 
   configureAddActions(deviceScope: string): Array<HeaderActionDescriptor> {
@@ -178,22 +170,13 @@ export class TestingTableConfigResolver implements Resolve<EntityTableConfig<Tes
       actions.push(
         {
           name: this.translate.instant('testingObj.add-testing-text'),
-          icon: 'insert_drive_file',
+          icon: 'add',
           isEnabled: () => true,
           onAction: ($event) => this.deviceWizard($event)
          }
       );
     }
-    if (deviceScope === 'customer') {
-      actions.push(
-        {
-          name: this.translate.instant('device.assign-new-device'),
-          icon: 'add',
-          isEnabled: () => true,
-          onAction: ($event) => this.addDevicesToCustomer($event)
-        }
-      );
-    }
+    
     return actions;
   }
 
@@ -214,26 +197,5 @@ export class TestingTableConfigResolver implements Resolve<EntityTableConfig<Tes
       }
     );
   }
-
-  addDevicesToCustomer($event: Event) {
-    if ($event) {
-      $event.stopPropagation();
-    }
-    this.dialog.open<AddEntitiesToCustomerDialogComponent, AddEntitiesToCustomerDialogData,
-      boolean>(AddEntitiesToCustomerDialogComponent, {
-      disableClose: true,
-      panelClass: ['tb-dialog', 'tb-fullscreen-dialog'],
-      data: {
-        customerId: this.customerId,
-        entityType: EntityType.TESTING
-      }
-    }).afterClosed()
-      .subscribe((res) => {
-        if (res) {
-          this.config.table.updateData();
-        }
-      });
-  }
-
 
 }

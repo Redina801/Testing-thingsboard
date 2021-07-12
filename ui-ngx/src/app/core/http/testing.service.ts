@@ -38,11 +38,9 @@ import { TestingRoutingModule } from '@app/modules/home/pages/testing/testing-ro
 export class TestingService {
 
   testingInfo:TestingInfo;
-  testing_:any;
   constructor(
     private http: HttpClient
   ) {
-    this.testing_ = null;
    }
   
 
@@ -59,24 +57,6 @@ export class TestingService {
 return this.http.get<PageData<TestingInfo>>(`/api/tenant/deviceInfos${pageLink.toQuery()}`,
 defaultHttpOptionsFromConfig(config));
 }
-  public getTenantDeviceInfosByDeviceProfileId(pageLink: PageLink, deviceProfileId: string = '',
-                                               config?: RequestConfig): Observable<PageData<TestingInfo>> {
-    return this.http.get<PageData<TestingInfo>>(`/api/tenant/deviceInfos${pageLink.toQuery()}&deviceProfileId=${deviceProfileId}`,
-      defaultHttpOptionsFromConfig(config));
-  }
-
-  public getCustomerDeviceInfos(customerId: string, pageLink: PageLink, type: string = '',
-                                config?: RequestConfig): Observable<PageData<TestingInfo>> {
-    return this.http.get<PageData<TestingInfo>>(`/api/customer/${customerId}/deviceInfos${pageLink.toQuery()}&type=${type}`,
-      defaultHttpOptionsFromConfig(config));
-  }
-
-  public getCustomerDeviceInfosByDeviceProfileId(customerId: string, pageLink: PageLink, deviceProfileId: string = '',
-                                                 config?: RequestConfig): Observable<PageData<TestingInfo>> {
-    return this.http.get<PageData<TestingInfo>>(`/api/customer/${customerId}/deviceInfos${pageLink.toQuery()}&deviceProfileId=${deviceProfileId}`,
-      defaultHttpOptionsFromConfig(config));
-  }
-
   public getTesting(testingId: string, config?: RequestConfig): Observable<Testing> {
     return this.http.get<Testing>(`/api/testing/${testingId}`, defaultHttpOptionsFromConfig(config));
   }
@@ -92,89 +72,15 @@ defaultHttpOptionsFromConfig(config));
   }
 
   public saveTesting(testing: Testing, config?: RequestConfig): Observable<Testing> {
-
-    // private TenantId tenantId;
-    // private CustomerId customerId;
-    // private String name;
-    // private String sensorType;
-    // private String model;
-    // private String protocol;
-    // private String customerTitle;
-    this.testing_ = {
-      tenantId: testing.tenantId,
-      customerId: testing.customerId,
-      name: testing.name,
-      sensorType: testing.sensorType,
-      model: testing.model,
-      protocol: testing.protocol,
-      customerTitle: ""
-
-    }
-    
-    console.log("ore a futet ktu a jo? ");
-    console.log("------------- : ", testing);
-
     return this.http.post<Testing>('/api/testing', testing, defaultHttpOptionsFromConfig(config));
   }
-  public saveTesting1() : Observable<any> {
-    console.log("ore a futet ktu a jo? ");
-    return this.http.get<any>('/api/testing1');
-  }
+
   public deleteDevice(deviceId: string, config?: RequestConfig) {
     return this.http.delete(`/api/testing/${deviceId}`, defaultHttpOptionsFromConfig(config));
   }
 
   public getDeviceTypes(config?: RequestConfig): Observable<Array<EntitySubtype>> {
     return this.http.get<Array<EntitySubtype>>('/api/device/types', defaultHttpOptionsFromConfig(config));
-  }
-
-  public getDeviceCredentials(deviceId: string, sync: boolean = false, config?: RequestConfig): Observable<TestingCredentials> {
-    const url = `/api/device/${deviceId}/credentials`;
-    if (sync) {
-      const responseSubject = new ReplaySubject<TestingCredentials>();
-      const request = new XMLHttpRequest();
-      request.open('GET', url, false);
-      request.setRequestHeader('Accept', 'application/json, text/plain, */*');
-      const jwtToken = AuthService.getJwtToken();
-      if (jwtToken) {
-        request.setRequestHeader('X-Authorization', 'Bearer ' + jwtToken);
-      }
-      request.send(null);
-      if (request.status === 200) {
-        const credentials = JSON.parse(request.responseText) as TestingCredentials;
-        responseSubject.next(credentials);
-      } else {
-        responseSubject.error(null);
-      }
-      return responseSubject.asObservable();
-    } else {
-      return this.http.get<TestingCredentials>(url, defaultHttpOptionsFromConfig(config));
-    }
-  }
-
-  public saveDeviceCredentials(deviceCredentials: TestingCredentials, config?: RequestConfig): Observable<TestingCredentials> {
-    return this.http.post<TestingCredentials>('/api/device/credentials', deviceCredentials, defaultHttpOptionsFromConfig(config));
-  }
-
-
-
-
-  public findByQuery(query: DeviceSearchQuery,
-                     config?: RequestConfig): Observable<Array<Testing>> {
-    return this.http.post<Array<Testing>>('/api/devices', query, defaultHttpOptionsFromConfig(config));
-  }
-
-  public findByName(deviceName: string, config?: RequestConfig): Observable<Testing> {
-    return this.http.get<Testing>(`/api/tenant/devices?deviceName=${deviceName}`, defaultHttpOptionsFromConfig(config));
-  }
-
-  public claimDevice(deviceName: string, claimRequest: ClaimRequest,
-                     config?: RequestConfig): Observable<ClaimResult> {
-    return this.http.post<ClaimResult>(`/api/customer/device/${deviceName}/claim`, claimRequest, defaultHttpOptionsFromConfig(config));
-  }
-
-  public unclaimDevice(deviceName: string, config?: RequestConfig) {
-    return this.http.delete(`/api/customer/device/${deviceName}/claim`, defaultHttpOptionsFromConfig(config));
   }
 
 }
